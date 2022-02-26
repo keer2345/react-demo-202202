@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
 
 const AddEmployee = () => {
+  const navigate = useNavigate()
   const [employee, setEmployee] = useState({
     firstName: '',
     lastName: '',
@@ -12,17 +14,25 @@ const AddEmployee = () => {
     const name = e.target.name
     const value = e.target.value
     setEmployee({ ...employee, [name]: value })
-    console.log(employee)
   }
   const saveEmployee = (e) => {
     e.preventDefault()
     EmployeeService.saveEmployee(employee)
       .then((res) => {
         console.log('Res:', res.data)
+        navigate('/employeeList')
       })
       .catch((error) => {
         console.log('Error:', error)
       })
+  }
+  const reset = (e) => {
+    e.preventDefault()
+    setEmployee({
+      firstName: '',
+      lastName: '',
+      email: ''
+    })
   }
 
   return (
@@ -76,6 +86,7 @@ const AddEmployee = () => {
 
         <div className='items-center justify-center h-14 w-full my-4 space-x-4 pt-4'>
           <button
+          onClick={reset}
             className='rounded text-white font-semibold bg-gray-400
            py-2 px-6 hover:bg-gray-600'>
             Reset
