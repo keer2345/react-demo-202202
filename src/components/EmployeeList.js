@@ -23,6 +23,11 @@ const EmployeeList = () => {
     setLoading(false)
   }
 
+  const editEmployee = (e, id) => {
+    e.preventDefault()
+    navigate(`/editEmployee/${id}`)
+  }
+
   const deleteEmployee = (e, id) => {
     e.preventDefault()
     EmployeeService.deleteEmployee(id).then((res) => {
@@ -68,6 +73,7 @@ const EmployeeList = () => {
                 <Employee
                   employee={employee}
                   key={employee.id}
+                  editEmployee={editEmployee}
                   deleteEmployee={deleteEmployee}
                 />
               ))}
