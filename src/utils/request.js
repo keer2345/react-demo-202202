@@ -5,7 +5,7 @@ import axios from 'axios'
 /**
  * 网络请求配置
  */
-const axiois_api = axios.create({
+const axios_api = axios.create({
   baseURL: '/api',
   timeout: 60000, //ms
   headers: {
@@ -14,4 +14,4 @@ const axiois_api = axios.create({
 })
 
 
-export default axiois_api
+export default axios_api
